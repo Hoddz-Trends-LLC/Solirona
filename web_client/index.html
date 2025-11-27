@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Solirona Lab — Hoddz Trends LLC</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <img src="../assets/logo.png" alt="Solirona Logo" id="logo">
+    <h1>Solirona Lab</h1>
+    <p>Quantum‑inspired engine by Hoddz Trends LLC</p>
+  </header>
+
+  <main>
+    <div id="controls">
+      <button id="pauseBtn">Pause / Resume</button>
+      <button id="resetBtn">Reset</button>
+    </div>
+    <canvas id="waveCanvas" width="800" height="300"></canvas>
+    <div id="nodeList"></div>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/socket.io-client@4/dist/socket.io.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
