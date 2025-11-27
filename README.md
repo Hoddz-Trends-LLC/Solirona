@@ -7,9 +7,9 @@
 
 ## 📖 Project Overview
 
-Solirona Lab is a **next-generation, quantum-inspired computational engine**, designed to simulate **wave-based interference networks**, probabilistic collapse, and emergent behavior similar to quantum systems.
+**Solirona Lab is a browser-based, quantum-inspired simulation engine that models wave interference, probabilistic collapse, and emergent network behaviors — bringing next-gen quantum-like computation to your fingertips.**
 
-It is **browser-based**, interactive, and modular, allowing users to:
+It is **interactive** and **modular**, allowing users to:
 
 - Create and explore **waveform-based nodes** (qubit-like structures)  
 - Visualize **resonance, interference, and collapse events**  
