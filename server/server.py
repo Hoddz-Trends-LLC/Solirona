@@ -21,7 +21,7 @@ def get_state():
     return jsonify(sim.get_state())
 
 @socketio.on('connect')
-def on_connect():
+def on_connect(auth=None):   # ✅ accept auth argument
     emit('state', sim.get_state())
 
 def background_sim():
