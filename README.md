@@ -1,214 +1,143 @@
-# 🌌 Solirona Lab
+# Solirona Lab
 
-**Solirona** — *Soliton Oscillatory Logic Interference Resonance Operator Network Architecture*  
-**Developed by:** Hoddz Trends LLC (American IT Company)
-
----
-
-## 📖 Project Overview
-
-**Solirona Lab is a browser-based, quantum-inspired simulation engine that models wave interference, probabilistic collapse, and emergent network behaviors — bringing next-gen quantum-like computation to your fingertips.**
-
-It is **interactive** and **modular**, allowing users to:
-
-- Create and explore **waveform-based nodes** (qubit-like structures)  
-- Visualize **resonance, interference, and collapse events**  
-- Generate **logic outputs, visual patterns, and optionally audio**  
-- Run **experiments in real-time** from a modern browser  
-- Extend the engine with **custom logic, networks, and artistic outputs**
-
-**Philosophy:**
-- Wave-based nodes act like qubits  
-- Connections simulate resonance and interference (entanglement-like behavior)  
-- Probabilistic collapse mimics measurement events  
-- Modular architecture allows emergent, chaotic, and artistic outputs  
+**Solirona Lab** is a browser-based, quantum-inspired simulation engine that visualizes how energy flows, resonates, and collapses across a network of virtual nodes. It blends scientific modeling with interactive controls, allowing users to explore complex signal dynamics in real time — no coding required.
 
 ---
 
-## 📂 Folder Structure
+## 🌌 What Is Solirona?
 
-SolironaLab/
-│
-├── README.md              # Project documentation
-├── ABOUT.md               # About Solirona & Hoddz Trends LLC
-├── requirements.txt       # Python dependencies
-│
-├── server/                # Backend engine & server
-│   ├── __init__.py
-│   ├── solirona_engine.py # Core node & network logic
-│   ├── network.py         # Node/network classes (optional modularization)
-│   ├── simulation.py      # Simulation loops, propagation, collapse
-│   └── server.py          # Flask + SocketIO backend
-│
-├── web_client/            # Browser-based frontend
-│   ├── index.html         # HTML UI
-│   ├── style.css          # Styling
-│   └── app.js             # JS frontend logic & visualization
-│
-└── assets/                # Branding / logos
-    └── logo.png           # Placeholder Solirona logo
+Solirona simulates a network of virtual nodes, each carrying a complex waveform (a signal). These nodes interact through resonance and interference, and occasionally collapse into discrete states based on probabilistic rules — mimicking behaviors found in quantum systems.
+
+You can think of it as a digital physics lab where each colored wave represents a node’s evolving signal. The simulation runs live in your browser, and you can control every aspect of it.
 
 ---
 
-## ⚙️ Engine Architecture
+## 🧠 Key Concepts
 
-### Node Design
-Each node represents a waveform unit:
-- Stores a complex waveform: amplitude + phase  
-- Connections to other nodes represent resonance paths  
-- Nodes propagate interference and undergo probabilistic collapse  
-
-class SolironaNode:
-    id: str
-    waveform: np.array(complex128)
-    connections: list
-    collapsed: bool
-    value: int or None
-
-### Network Design
-Graph-based structure where nodes connect randomly or manually:
-- Enables entanglement-like interference  
-- Supports arbitrary network topologies  
-
-class SolironaNetwork:
-    nodes: dict[node_id -> SolironaNode]
-
-    methods:
-        add_node(node)
-        connect(id1, id2)
-        random_connect(prob)
-
-### Core Engine Loop
-- Propagate resonance  
-- Rotate phase (randomness simulates quantum evolution)  
-- Collapse probability → measurement outcomes  
-- Update state → frontend visualization  
-
-for node in network.nodes:
-    propagate_resonance(node)
-    if not node.collapsed and random.random() < collapse_chance:
-        collapse(node)
-
-### Collapse & Measurement
-Probabilistic collapse mimics quantum measurement:
-
-probabilities = np.abs(node.waveform)**2
-probabilities /= probabilities.sum()
-choice = np.random.choice(len(node.waveform), p=probabilities)
-node.collapsed = True
-node.value = choice
+- **Node**: A virtual signal point with a waveform that evolves over time.
+- **Waveform**: A list of complex numbers representing the node’s signal.
+- **Resonance**: Nodes influence each other’s signals through blending.
+- **Interference**: Signals mix and shift based on network connections.
+- **Collapse**: A node locks into a final state, shown as a red dot.
+- **Network**: A graph of nodes connected by probabilistic links.
 
 ---
 
-## 🖥️ Browser-Based Lab
+## 🖥️ Interface Overview
 
-### Frontend Features
-- Live waveform visualization  
-- Pause / Resume button  
-- Reset network button  
-- Color-coded nodes and waveforms  
-- Extensible for graph visualization, audio playback, or collapses  
+### 🔹 Canvas Display
+- Colored waveforms represent each node’s signal.
+- Red dots indicate collapsed nodes.
+- Rows group nodes for visual clarity.
+- Waveforms evolve in real time as the simulation runs.
 
-### Frontend Architecture
-- index.html → UI structure  
-- style.css → branding and layout  
-- app.js → receives WebSocket updates and draws waveforms on canvas  
-
-socket.on('state', state => {
-    simState = state;
-    render();
-});
+### 🔹 Status Box
+Updates every 5 seconds with:
+- Simulation running status
+- Number of collapsed nodes
+- Average signal magnitude
+- Time and separation metrics
 
 ---
 
-## 🔧 Installation
+## 🎛️ Control Panel
 
-### Requirements
-- Python 3.9+  
-- Dependencies (from requirements.txt):
-  - flask  
-  - flask-socketio  
-  - numpy  
-  - scipy  
-  - eventlet  
-- Optional for audio: pyaudio
-
-### Install
-git clone <repo-url>
-cd SolironaLab/server
-pip install -r ../requirements.txt
+### 🧪 Simulation Controls
+| Button           | Description                                      |
+|------------------|--------------------------------------------------|
+| **Pause / Resume** | Start or stop the simulation loop               |
+| **Reset**        | Reload the simulation from scratch               |
+| **Step ×1**      | Advance simulation by one step                   |
+| **Step ×10**     | Advance simulation by ten steps                  |
 
 ---
 
-## ▶️ Running Solirona Lab
+### 🔗 Network Controls
+| Control              | Description                                      |
+|----------------------|--------------------------------------------------|
+| **Nodes (input)**    | Set total number of nodes                        |
+| **Apply**            | Apply new node count                             |
+| **Connect prob**     | Set connection probability between nodes         |
+| **Reconnect**        | Rebuild network connections                      |
+| **Add node**         | Add one node to the network                      |
+| **Remove node**      | Remove the last node                             |
 
-Start the backend server:
+---
+
+### ⚛️ Quantum-Inspired Operations
+| Control                  | Description                                      |
+|--------------------------|--------------------------------------------------|
+| **Phase angle (rad)**    | Set rotation angle for signal phase             |
+| **Rotate phase (all)**   | Apply phase rotation to all nodes               |
+| **Interference gain**    | Set how strongly nodes influence each other     |
+| **Set interference gain**| Apply new interference strength                 |
+| **Collapse chance**      | Set probability of node collapse per step       |
+| **Set collapse chance**  | Apply new collapse probability                  |
+
+---
+
+## 🚀 Getting Started
+
+### 1. Clone the repository
+
+git clone https://github.com/hoddz-trends-llc/solirona.git
+cd solirona
+
+## 2. Setup Python environment
+
+python -m venv venv
+source venv/bin/activate  # or .\venv\Scripts\activate on Windows
+pip install -r requirements.txt
+
+## 3. Run the server
+
+cd server
 python server.py
 
-Open browser at:  
-http://localhost:5000
+## 4. Open the lab
 
-**Controls:**
-- Pause / Resume → toggle simulation  
-- Reset → reload network and restart simulation  
+Visit http://localhost:5000 in your browser.
 
-**Observe:**
-- Waveform canvas  
-- Real-time evolution of node amplitudes  
-- Probabilistic collapse events  
+## 🧩 Folder Structure
 
----
+SolironaLab/
+├─ server/
+│  ├─ server.py
+│  ├─ simulation.py
+│  └─ solirona_engine.py
+├─ web_client/
+│  ├─ index.html
+│  ├─ style.css
+│  ├─ app.js
+│  └─ assets/
+│     └─ logo.png
+├─ requirements.txt
+└─ README.md
 
-## 🔄 Data Flow Overview
+## 🌍 Use Cases
 
-[Simulation Engine] ---(JSON state)---> [Browser Canvas]
-      |                                       ^
-      |                                       |
-  Waveform calculations                 User interactions
-      |                                       |
-[Node propagation & collapse]  <--- Pause/Reset/Modify network
+Education: Teach quantum-inspired concepts visually.
+Research: Prototype signal networks and collapse models.
+Creative: Explore emergent patterns and resonance art.
+Engineering: Simulate probabilistic systems and waveform blending.
 
----
+## 🛠️ Technologies Used
 
-## 🌟 Extension Points
+Python 3.12
+Flask + Flask-SocketIO
+NumPy
+Eventlet
+HTML/CSS/JavaScript
 
-- Audio generation: Web Audio API for waveform-based sound  
-- Interactive network editor: Add/remove nodes, manually collapse  
-- GPU acceleration: CuPy or WebAssembly for large networks  
-- Hybrid neural-net coupling: Combine waveform outputs with AI  
-- Pattern-driven visualizations: WebGL or D3.js animations  
-- Save / Load network states: JSON export/import  
-- Multi-user collaboration: Real-time shared simulations  
-- Branding & Documentation: About page, licensing  
+## 📦 Requirements
 
----
+flask
+flask-cors
+flask-socketio
+eventlet
+numpy
+scipy
 
-## 🚀 Future Development Ideas
-
-- Larger networks with hundreds of nodes  
-- GPU-enabled backend for real-time massive interference  
-- Live audio-visual synthesis of collapse events  
-- Network evolution algorithms for self-organizing patterns  
-- Web-based Solirona Lab portal for sharing simulations  
-
----
-
-## 📌 Notes
-
-- Memory Requirements: ≥ 8GB RAM recommended for ~50-100 nodes with waveform_length=128  
-- Performance: Real-time on modern laptops; scalable with GPU acceleration  
-- License: TBD by Hoddz Trends LLC  
-
----
-
-## 📚 References
-
-- Inspired by quantum computing concepts (wavefunctions, collapse)  
-- Soliton-based resonance, interference patterns  
-- Designed for solo developers but extensible to multi-user labs  
-
----
-
-## 🏷️ About
-
-See ABOUT.md for more details about Solirona and Hoddz Trends LLC.
+## 🧑‍💻 Credits
+Created by Hoddz Trends LLC 
+Interface and simulation logic inspired by quantum systems and signal dynamics.
