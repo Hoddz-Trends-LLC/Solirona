@@ -1,27 +1,61 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Solirona Lab — Hoddz Trends LLC</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="utf-8" />
+  <title>Solirona Lab</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="/style.css" />
+  <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
 </head>
 <body>
-  <header>
-    <img src="../assets/logo.png" alt="Solirona Logo" id="logo">
-    <h1>Solirona Lab</h1>
-    <p>Quantum‑inspired engine by Hoddz Trends LLC</p>
+  <header class="header">
+    <img src="/assets/logo.png" alt="Solirona" class="logo" />
+    <div class="title">
+      <h1>Solirona Lab</h1>
+      <p class="subtitle">Quantum-inspired engine by Hodot Trends LLC</p>
+    </div>
   </header>
 
-  <main>
-    <div id="controls">
+  <p class="intro">
+    Solirona is a quantum-inspired simulation lab. It shows how energy flows, resonates,
+    and collapses across a network of virtual nodes. Each colored wave represents a node’s
+    signal evolving in real time.
+  </p>
+
+  <section id="controlPanel" class="panel">
+    <div class="card">
+      <h4>Simulation</h4>
       <button id="pauseBtn">Pause / Resume</button>
       <button id="resetBtn">Reset</button>
+      <button id="stepBtn">Step ×1</button>
+      <button id="step10Btn">Step ×10</button>
     </div>
-    <canvas id="waveCanvas" width="800" height="300"></canvas>
-    <div id="nodeList"></div>
-  </main>
 
-  <script src="https://cdn.jsdelivr.net/npm/socket.io-client@4/dist/socket.io.min.js"></script>
-  <script src="app.js"></script>
+    <div class="card">
+      <h4>Network</h4>
+      <label>Nodes: <input id="nodeCount" type="number" min="1" value="40" /></label>
+      <button id="applyNodeCount">Apply</button>
+      <label>Connect prob: <input id="connectProb" type="number" step="0.05" min="0" max="1" value="0.3" /></label>
+      <button id="reconnect">Reconnect</button>
+      <button id="addNode">Add node</button>
+      <button id="removeNode">Remove node</button>
+    </div>
+
+    <div class="card">
+      <h4>Quantum-inspired ops</h4>
+      <label>Phase angle (rad): <input id="phaseAngle" type="number" step="0.1" value="0.5" /></label>
+      <button id="applyPhaseAll">Rotate phase (all)</button>
+      <label>Interference gain: <input id="interfGain" type="number" step="0.1" value="0.5" /></label>
+      <button id="applyInterfGain">Set interference gain</button>
+      <label>Collapse chance: <input id="collapseChance" type="number" step="0.01" min="0" max="1" value="0.05" /></label>
+      <button id="applyCollapseChance">Set collapse chance</button>
+    </div>
+  </section>
+
+  <canvas id="waveCanvas" width="1200" height="600"></canvas>
+
+  <div id="statusBox" class="status">Status: Initializing simulation...</div>
+
+  <script src="/app.js"></script>
 </body>
 </html>
