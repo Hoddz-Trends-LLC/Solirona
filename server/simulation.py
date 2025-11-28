@@ -4,6 +4,7 @@ from solirona_engine import SolironaNetwork, SolironaNode
 import random
 import numpy as np
 import threading
+import time   # ✅ Added import
 
 class SolironaSimulation:
     def __init__(self, num_nodes=30, connect_prob=0.25, waveform_length=128):
@@ -58,11 +59,19 @@ class SolironaSimulation:
         self.running = False
 
     def get_state(self):
-        # Return a serializable representation of network state
+        # ✅ Convert complex numbers into serializable dicts
         state = {}
         for nid, node in self.network.nodes.items():
             state[nid] = {
-                "waveform": node.waveform.tolist(),
+                "waveform": [
+                    {
+                        "real": float(val.real),
+                        "imag": float(val.imag),
+                        "magnitude": float(abs(val)),
+                        "phase": float(np.angle(val))
+                    }
+                    for val in node.waveform
+                ],
                 "collapsed": node.collapsed,
                 "value": node.value,
                 "connections": [nb.id for nb in node.connections]
