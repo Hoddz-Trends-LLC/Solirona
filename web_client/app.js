@@ -62,6 +62,32 @@ function updateStatus() {
 }
 setInterval(updateStatus, 5000);
 
+// 🔹 Sidebar calculations every 5s
+function updateCalculations() {
+  if (!simState) return;
+  const nodes = Object.values(simState);
+  const collapsed = nodes.filter(n => n.collapsed).length;
+  const total = nodes.length;
+
+  const avgMag = nodes.reduce((acc, n) => {
+    if (!n.waveform || !n.waveform.length) return acc;
+    const mags = n.waveform.map(c => c.magnitude ?? Math.abs(c));
+    return acc + (mags.reduce((a, b) => a + b, 0) / mags.length);
+  }, 0) / (total || 1);
+
+  const calcText = `
+Nodes: ${total}
+Collapsed: ${collapsed}
+Avg Magnitude: ${avgMag.toFixed(3)}
+Collapse Chance: ${(nodes[0]?.collapseChance ?? '0.05')}
+Interference Gain: ${(nodes[0]?.interferenceGain ?? '0.5')}
+Phase Angle: ${(nodes[0]?.phase ?? 'variable')}
+  `;
+  const calcBox = document.getElementById('calcContent');
+  if (calcBox) calcBox.textContent = calcText;
+}
+setInterval(updateCalculations, 5000);
+
 // Rendering
 function render() {
   if (!simState) return;
