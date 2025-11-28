@@ -12,7 +12,7 @@
     <img src="/assets/logo.png" alt="Solirona" class="logo" />
     <div class="title">
       <h1>Solirona Lab</h1>
-      <p class="subtitle">Quantum-inspired engine by Hodot Trends LLC</p>
+      <p class="subtitle">Quantum-inspired engine</p>
     </div>
   </header>
 
@@ -22,6 +22,7 @@
     signal evolving in real time.
   </p>
 
+  <!-- Control Panel -->
   <section id="controlPanel" class="panel">
     <div class="card">
       <h4>Simulation</h4>
@@ -52,8 +53,23 @@
     </div>
   </section>
 
-  <canvas id="waveCanvas" width="1200" height="600"></canvas>
+  <!-- Graph + Sidebar -->
+  <div style="display:flex; align-items:flex-start; margin:20px;">
+    <canvas id="waveCanvas" width="900" height="600"></canvas>
 
+    <div id="calcBox" style="width:300px; margin-left:20px; background:#111; color:#0f0; padding:10px; font-family:monospace; border:1px solid #333;">
+      <h4 style="color:#ddd;">Live Calculations</h4>
+      <div id="calcContent">Waiting for simulation...</div>
+      <h4 style="color:#ddd; margin-top:15px;">Equations</h4>
+      <pre style="color:#ccc; font-size:0.9em;">
+Resonance: ψᵢ(t+1) = ψᵢ(t) + g Σ ψⱼ(t)
+Phase:     ψᵢ(t+1) = ψᵢ(t) · e^(iθ)
+Collapse:  P(k) = |ψᵢ(k)|² / Σ |ψᵢ(j)|²
+      </pre>
+    </div>
+  </div>
+
+  <!-- Status -->
   <div id="statusBox" class="status">Status: Initializing simulation...</div>
 
   <script src="/app.js"></script>
