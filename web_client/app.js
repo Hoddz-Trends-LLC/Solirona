@@ -33,21 +33,39 @@ function render() {
   nodeIds.forEach((nid, idx) => {
     const node = simState[nid];
     const wf = node.waveform;
-    const absvals = wf.map(c => Math.abs(c));
+
+    // Extract magnitudes and phases
+    const absvals = wf.map(c => Math.abs(c.magnitude ?? c)); // handle dict or raw number
+    const phases = wf.map(c => (c.phase !== undefined ? c.phase : 0));
     const maxA = Math.max(...absvals) || 1;
     const scaled = absvals.map(a => a / maxA);
 
     const row = Math.floor(idx / perRow);
     const yOffset = row * rowHeight;
 
-    ctx.strokeStyle = `hsl(${(idx * 360 / count)}, 80%, 60%)`;
+    // Color hue by node index, brightness by average phase
+    const avgPhase = phases.reduce((a, b) => a + b, 0) / phases.length;
+    const hue = (idx * 360 / count);
+    const lightness = 50 + 30 * Math.sin(avgPhase); // vary brightness with phase
+    ctx.strokeStyle = `hsl(${hue}, 80%, ${lightness}%)`;
+
     ctx.beginPath();
-    wf.forEach((c, i) => {
-      const x = i * (canvas.width / wf.length);
-      const y = yOffset + (1 - scaled[i]) * (rowHeight - 10) + 5;
+    scaled.forEach((val, i) => {
+      const x = i * (canvas.width / scaled.length);
+      const y = yOffset + (1 - val) * (rowHeight - 10) + 5;
       if (i === 0) ctx.moveTo(x, y);
       else ctx.lineTo(x, y);
     });
     ctx.stroke();
+
+    // Highlight collapsed nodes
+    if (node.collapsed) {
+      ctx.fillStyle = 'red';
+      const collapseX = node.value * (canvas.width / wf.length);
+      const collapseY = yOffset + rowHeight / 2;
+      ctx.beginPath();
+      ctx.arc(collapseX, collapseY, 5, 0, 2 * Math.PI);
+      ctx.fill();
+    }
   });
 }
